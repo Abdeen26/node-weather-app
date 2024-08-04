@@ -3,25 +3,26 @@ const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 // Loading Express
 const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
 // Loading HBS Module
 const hbs = require('hbs')
+const app = express()
+const port = process.env.PORT || 3000
 //Static Public Folder declaration
 const publicDirPath = path.join(__dirname, '../public')
-
-// loading hbs engine
-app.set('view engine', 'hbs')
 //changing hbs default views path
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
+
+// loading hbs engine
+app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
+
+app.use(express.static(publicDirPath))
 
 app.get('', (req, res) => {
   res.render('index', { title: 'Weather', name: 'Abdeen' })
 })
-app.use(express.static(publicDirPath))
 
 app.get('/weather', (req, res) => {
   if (!req.query.address) {
