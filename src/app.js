@@ -4,6 +4,7 @@ const forecast = require('./utils/forecast')
 // Loading Express
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 3000
 // Loading HBS Module
 const hbs = require('hbs')
 //Static Public Folder declaration
@@ -58,6 +59,6 @@ app.get('/*/', (req, res) => {
   res.render('error-page')
 })
 
-app.listen(3000, () => {
-  console.log('server is running')
+app.listen(port, () => {
+  console.log(`server is running on port ${port}`)
 })
